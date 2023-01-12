@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Group index{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-header">
+            <div class="float-left">
+                <h5>Group Index</h5>
+            </div>
+            <div class="float-right">
+                <a href="{{  path('app_group_new') }}">Create new</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <table class="table">
+                        <thead>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                        </thead>
+                        <tbody>
+                        {% for key,group in groups %}
+                            <tr id="tr-{{ key }}">
+                                <td>{{ group.id }}</td>
+                                <td>{{ group.name }}</td>
+                                <td>
+                                    <a class="badge-pill badge-primary" href="{{ path('app_group_show', {'id': group.id }) }}">Edit</a>
+                                    <a class="badge-pill badge-danger" href="#">Delete</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="3">No Groups</td>
+                            </tr>
+                        {%  endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            Total of {{ groups|length }} record(s)
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
